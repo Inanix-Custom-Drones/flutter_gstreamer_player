@@ -4,7 +4,6 @@ import io.flutter.embedding.android.FlutterActivity
 
 import android.os.Bundle
 import android.util.Log
-
 import org.freedesktop.gstreamer.GStreamer
 
 class MainActivity: FlutterActivity() {

@@ -6,9 +6,9 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE    := flutter_gstreamer_player_plugin_android
 LOCAL_SRC_FILES := flutter_gstreamer_player_plugin_android.cc gst_player.cc
-# LOCAL_STATIC_LIBRARIES := android_native_app_glue
 LOCAL_SHARED_LIBRARIES := gstreamer_android
 LOCAL_LDLIBS := -llog -landroid
+
 include $(BUILD_SHARED_LIBRARY)
 
 ifndef GSTREAMER_ROOT_ANDROID

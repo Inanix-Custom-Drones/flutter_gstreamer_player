@@ -18,7 +18,7 @@ class GstPlayerTextureController {
     // if not, receiver of method channel always received 0
     // if (currentPlatform == "ios") {
     GstPlayerTextureController._id = GstPlayerTextureController._id + 1;
-    print("GstPlayerTextureController.id = ${_id}");
+    print("GstPlayerTextureController.id = $_id");
     // }
     textureId = await _channel.invokeMethod('PlayerRegisterTexture', {
       'pipeline': pipeline,
@@ -28,7 +28,7 @@ class GstPlayerTextureController {
     return textureId;
   }
 
-  Future<Null> dispose() {
+  Future<void> dispose() {
     return _channel.invokeMethod('dispose', {'textureId': textureId});
   }
 
@@ -64,7 +64,7 @@ class _GstPlayerState extends State<GstPlayer> {
     super.didUpdateWidget(oldWidget);
   }
 
-  Future<Null> initializeController() async {
+  Future<void> initializeController() async {
     print("initializeController");
     await _controller.initialize(widget.pipeline);
     print("pipeline: ${widget.pipeline}");
