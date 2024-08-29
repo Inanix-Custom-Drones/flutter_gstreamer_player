@@ -40,7 +40,7 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
         main.java.srcDirs += 'src'
-        main.jniLibs.srcDirs = ['src/main/jniLibs']
+        main.jniLibs.srcDirs = ['../gst_player/libs']
     }
 
     defaultConfig {
