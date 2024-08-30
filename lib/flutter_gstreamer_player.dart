@@ -18,13 +18,13 @@ class GstPlayerTextureController {
     // if not, receiver of method channel always received 0
     // if (currentPlatform == "ios") {
     GstPlayerTextureController._id = GstPlayerTextureController._id + 1;
-    print("GstPlayerTextureController.id = $_id");
+    debugPrint("GST_PLAYER GstPlayerTextureController.id = $_id");
     // }
     textureId = await _channel.invokeMethod('PlayerRegisterTexture', {
       'pipeline': pipeline,
       'playerId': GstPlayerTextureController._id,
     });
-    print("initialize textureId: $textureId");
+    debugPrint("GST_PLAYER initialize textureId: $textureId");
     return textureId;
   }
 
@@ -50,24 +50,24 @@ class _GstPlayerState extends State<GstPlayer> {
   @override
   void initState() {
     initializeController();
-    print("FIRST initializeController");
+    debugPrint("GST_PLAYER FIRST initializeController");
     super.initState();
   }
 
   @override
   void didUpdateWidget(GstPlayer oldWidget) {
-    print("didUpdateWidget");
+    debugPrint("GST_PLAYER didUpdateWidget");
     if (widget.pipeline != oldWidget.pipeline) {
-      print("widget.pipeline != oldwidget.pipeline");
+      debugPrint("GST_PLAYER widget.pipeline != oldwidget.pipeline");
       initializeController();
     }
     super.didUpdateWidget(oldWidget);
   }
 
   Future<void> initializeController() async {
-    print("initializeController");
+    debugPrint("GST_PLAYER initializeController");
     await _controller.initialize(widget.pipeline);
-    print("pipeline: ${widget.pipeline}");
+    debugPrint("GST_PLAYER pipeline: ${widget.pipeline}");
     setState(() {});
   }
 
@@ -77,7 +77,7 @@ class _GstPlayerState extends State<GstPlayer> {
     switch (currentPlatform) {
       case 'linux':
       case 'android':
-        print("gstreamer ANDROID textureId: ${_controller.textureId}");
+        debugPrint("GST_PLAYER ANDROID textureId: ${_controller.textureId}");
         return Container(
           child: _controller.isInitialized
               ? Texture(textureId: _controller.textureId)
@@ -87,7 +87,7 @@ class _GstPlayerState extends State<GstPlayer> {
       case 'ios':
         String viewType = _controller.textureId.toString();
         final Map<String, dynamic> creationParams = <String, dynamic>{};
-        print("on build textureId: $viewType ");
+        debugPrint("GST_PLAYER on build textureId: $viewType ");
         return UiKitView(
           viewType: viewType,
           layoutDirection: TextDirection.ltr,
@@ -96,7 +96,7 @@ class _GstPlayerState extends State<GstPlayer> {
         );
 
       default:
-        throw UnsupportedError('Unsupported platform view');
+        throw UnsupportedError('GST_PLAYER Unsupported platform view $currentPlatform');
     }
   }
 }
